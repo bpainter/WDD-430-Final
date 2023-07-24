@@ -1,0 +1,33 @@
+<main class="main-content my-posts">
+  <section class="posts">
+    <h2 class="posts-title">My Posts</h2>
+
+    <div *ngIf="isloading" class="loading-notification">
+      <app-loading></app-loading>
+    </div>
+
+    <ng-container *ngIf="posts.length>0">
+      <ng-container *ngFor="let post of posts;let i=index" data-aos="fade-up">
+        <article class="post">
+          <header class="post-header">
+            <h3 class="post-title">
+              <a [routerLink]="[post.id]" class="post-link"> {{ post.title }}</a>
+            </h3>
+            <p class="post-date">Posted on {{post.postDate | date:'short'}}</p>
+          </header>
+
+          <section class="post-body">
+            <img src={{post.imagePath}} alt="" class="post-body-image">
+            <div class="post-body-content">
+              {{post.content |slice:0: 170 }}
+              <a [routerLink]="[post.id]">{{post.content.length > 170 ? '...Read More' : ''}}</a>
+            </div>
+          </section>
+
+          <footer class="post-footer">
+          </footer>
+        </article>
+      </ng-container>
+    </ng-container>
+  </section>
+</main>

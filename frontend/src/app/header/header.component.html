@@ -1,0 +1,35 @@
+<header class="masthead">
+  <nav class="primary-menu">
+    <ul class="primary-menu-nav">
+      <li class="primary-menu-nav-item">
+        <a class="primary-menu-nav-item-link main-logo" routerLink="/">Bermon's Boring Blog</a>
+      </li>
+      <li class="primary-menu-nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="primary-menu-nav-item-link" routerLink="/">All Posts</a>
+      </li> 
+      <li class="primary-menu-nav-item" routerLinkActive="active" *ngIf="userIsAuthenticated">
+        <a class="primary-menu-nav-item-link" routerLink="/myposts">My Posts</a>
+      </li>
+      <li class="primary-menu-nav-item" routerLinkActive="active" *ngIf="userIsAuthenticated">
+        <a class="primary-menu-nav-item-link" routerLink="/create">New Post</a>
+      </li>
+    </ul>
+  </nav>
+
+  <nav class="secondary-menu">
+    <ul class="secondary-menu-nav">
+      <li class="secondary-menu-nav-item" routerLinkActive="active" *ngIf="userIsAuthenticated && profileisSet">
+        <a class="secondary-menu-nav-item-link" [routerLink]="['/profile',username]">My Profile</a>
+      </li>
+      <li class="secondary-menu-nav-item" routerLinkActive="active" *ngIf="userIsAuthenticated && !profileisSet ">
+        <a class="secondary-menu-nav-item-link" [routerLink]="['/profile']">Create Profile</a>
+      </li>
+      <li class="secondary-menu-nav-item" routerLinkActive="active" *ngIf="!userIsAuthenticated">
+        <a class="secondary-menu-nav-item-link" routerLink="/login">Log In</a>
+      </li>
+      <li class="secondary-menu-nav-item" routerLinkActive="active" *ngIf="userIsAuthenticated">
+        <a class="secondary-menu-nav-item-link" (click)="onLogout()">Log Out</a>
+      </li>
+    </ul>
+  </nav>  
+</header>

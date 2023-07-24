@@ -1,0 +1,66 @@
+<main class="main-content create-post">
+  <form [formGroup]="form" (submit)="onSavePost()" class="form">
+    <section class="form-body">
+      <h2 class="form-body-title"> Post</h2>
+
+      <div *ngIf="isLoading" class="loading-notification">
+        <app-loading></app-loading>
+      </div>
+
+      <ul class="form-group">
+        <li class="form-group-item">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            id="title"
+            class="form-control"
+            formControlName="title"
+            required
+            minlength="3"
+          />
+          <span class="form-inline-error" *ngIf="form.get('title').invalid && form.get('title').touched">
+            Please enter a post title.
+          </span>
+        </li>
+        <li class="form-group-item">
+          <label for="image">Image</label>
+          <input
+            type="file"
+            id="image"
+            class="form-control"
+            formControlName="image"
+            required
+            #filePicker
+            (change)="onImagePicked($event)"
+          />
+          <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+            <img [src]="imagePreview" [alt]="form.value.title" />
+          </div>
+          <span class="form-inline-error" *ngIf="form.get('image').invalid && form.dirty && form.touched">
+            Please choose a valid image.
+          </span>
+        </li>
+        <li class="form-group-item">
+          <label for="content">Content</label>
+          <textarea
+            id="content"
+            class="form-control"
+            rows="10"
+            formControlName="content"
+            required
+            minlength="3"
+          ></textarea>
+          <span class="form-inline-error" *ngIf="form.get('content').invalid && form.get('content').touched">
+            Please enter a content for the post.
+          </span>
+        </li>
+      </ul>
+    </section>
+
+    <footer class="form-footer">
+      <button class="form-action form-action-primary" type="submit" [disabled]="!form.valid">
+        Save Post
+      </button>
+    </footer>
+  </form>
+</main>

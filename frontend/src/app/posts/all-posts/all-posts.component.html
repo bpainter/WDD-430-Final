@@ -1,0 +1,55 @@
+<main class="main-content all-posts">
+  <div class="banner" *ngIf = "!userIsAuthenticated">
+    <h1 class="banner-title">Be boring with Bermon</h1>
+    <p class="banner-description">Create your own blog away from home and share your mundane thoughts with the world.</p>
+    <a class="banner-action" routerLink="/login">Create an Account</a>
+  </div>
+
+  <section class="posts">
+    <h2 class="posts-title">Latest Posts</h2>
+
+    <div *ngIf="isloading" class="loading-notification">
+      <app-loading></app-loading>
+    </div>
+
+
+    <article class="post" *ngFor="let post of posts;let i=index" data-aos="fade-up">
+      <header class="post-header">
+        <div class="post-author" *ngFor="let user of postbyUser">
+          <div *ngIf="user.creator === post.creator">
+            <img src={{user.imagePath}} alt="" class="post-author-image">
+            <a [routerLink]="['public', user.username]" class="post-author-name">{{user.username}}</a>
+          </div>
+        </div>
+
+        <h3 class="post-title">
+          <a [routerLink]="[post.id]" class="post-link"> {{ post.title }}</a>
+        </h3>
+        <p class="post-date">Posted on {{post.postDate | date:'short'}}</p>
+      </header>
+
+      <section class="post-body">
+        <img src={{post.imagePath}} alt="" class="post-body-image">
+        <div class="post-body-content">
+          {{post.content |slice:0: 170 }}
+          <a [routerLink]="[post.id]">{{post.content.length > 170 ? '...Read More' : ''}}</a>
+        </div>
+      </section>
+
+      <footer class="post-footer"></footer>
+    </article>
+  </section>
+
+  <aside class="sidebar">
+    <h3 class="sidebar-title">Popular Authors</h3>
+
+    <ul class="popular-authors">
+      <li *ngFor="let usr of user" class="popular-authors-item">
+        <a [routerLink]="['public',usr.username]" class="popular-authors-link">
+          <img src={{usr.imagePath}} alt="" class="popular-authors-image">
+          <p class="popular-authors-name">{{usr.username}}</p>
+        </a>
+      </li>
+    </ul>
+  </aside>
+</main>

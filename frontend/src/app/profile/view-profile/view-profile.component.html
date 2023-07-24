@@ -1,0 +1,50 @@
+<main class="main-content profile-details">
+  <article class="profile">
+    <div *ngIf="isloading" class="loading-notification">
+      <app-loading></app-loading>
+    </div>
+
+    <header class="profile-header" *ngIf="profile">
+      <img src={{profile.imagePath}} class="profile-image">
+      <h1 class="profile-name">{{profile.username}}</h1>
+      <p class="profile-bio">{{profile.bio}}</p>
+      <a *ngIf="userId===profile.creator && url =='profile'" [routerLink]="['../edit',profileId]" class="action-primary">Edit Profile</a>
+    </header>
+
+    <section class="profile-body">
+
+      <section class="posts">
+        <h2 class="posts-title" *ngIf = "profile">{{profile.username}}'s Posts</h2>
+        <div *ngIf="isloading" class="loading-notification">
+          <app-loading></app-loading>
+        </div>
+
+        <ng-container *ngIf="posts.length>0">
+          <ng-container *ngFor="let post of posts;let i=index" data-aos="fade-up">
+            <article class="post">
+              <header class="post-header">
+                <h2 class="post-title">
+                  <a *ngIf="userId===post.creator"  [routerLink]="['../../myposts',post.id]" class="post-link"> {{ post.title }}</a>
+                  <a *ngIf="userId!==post.creator"  [routerLink]="['posts',post.id]" class="post-link"> {{ post.title }}</a>
+                </h2>
+                <p class="post-date">Posted on {{post.postDate | date:'short'}}</p>
+              </header>
+
+              <section class="post-body">
+                <img src={{post.imagePath}} alt="" class="post-body-image">
+                <div class="post-body-content">
+                  {{post.content |slice:0: 400 }}{{post.content.length > 400 ? ' ...' : ''}}
+                </div>
+              </section>
+            </article>
+          </ng-container>
+        </ng-container>
+
+        <p *ngIf="posts.length==0 && !isloading">This author has no posts.</p>
+      </section>
+    </section>
+
+    <footer class="profile-footer">
+    </footer>
+  </article>
+</main>

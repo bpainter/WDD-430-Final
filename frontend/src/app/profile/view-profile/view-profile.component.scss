@@ -1,0 +1,148 @@
+.profile {
+    background-color: #E2C9F7;
+    &-header {
+        border-bottom: 1px solid #14092C;
+        padding: 3rem 8rem;
+        display: grid; 
+        grid-template-columns: .8fr 1.8fr; 
+        grid-template-rows: 1fr 45px; 
+        gap: 10px  60px; 
+        grid-template-areas: 
+          "image bio"
+          "action bio"; 
+    }
+    &-image {
+        border: 3px solid #BDA3D2;
+        border-radius: 200px;
+        grid-area: image;
+        object-fit: cover;
+        width: 100%;
+    }
+    &-name {
+        color: #4F4572;
+        grid-area: bio;
+        margin: 0;
+    }
+    &-bio {
+        grid-area: bio;
+        line-height: 1.6;
+        margin-top: 3rem;
+    }
+    .action-primary {
+        background-color: #EBBA51;
+        border: none;
+        border-radius: 4px;
+        color: #14092C;
+        display: block;
+        font-size: 1rem;
+        font-weight: 700;
+        grid-area: action;
+        padding: 1rem 2rem;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: all .1s ease-in-out;
+        &:hover, &:focus {
+            background-color: darken(#EBBA51, 10%);
+        }
+        &:active {
+            background-color: lighten(#EBBA51, 5%);
+        }
+        &:disabled {
+            background-color: #BDA3D2;
+            color: #8B74A6;
+            cursor: not-allowed;
+        }
+    }
+}
+
+
+.posts {
+    background-color: #E2C9F7;
+    &-title {
+        color: #4F4572;
+        font-size: 2rem;
+        padding: 1rem 8rem;
+    }
+}
+
+.post {
+    border-top: #14092C 1px solid;
+    padding: 2rem 8rem;
+    &-header {
+        margin-bottom: 2.4rem;
+    }
+    &-title {
+        margin: 0;
+    }
+    &-link {
+        color: #4F4572;
+        font-size: 1.8rem;
+        line-height: 1.4;
+        &:hover, &:focus {
+            color: #14092C;
+        }
+    }
+    &-date {
+        color: #4F4572;
+        font-size: .8rem;
+    }
+    &-body {
+        display: flex;
+        column-gap: 1rem;
+        margin-bottom: 1.6rem;
+        &-image {
+            object-fit: cover;
+            width: 120px;
+            height: 120px;
+        }
+        &-content {
+            line-height: 1.6;
+        }
+    }
+    &-author {
+        margin-bottom: 1rem;
+        div {
+            display: flex;
+            column-gap: .5rem;
+        }
+        &-image {
+            border: 3px solid #BDA3D2;
+            border-radius: 40px;
+            object-fit: cover;
+            width: 40px;
+            height: 40px;
+        }
+        &-name {
+            color: #4F4572;
+            height: 43px;
+            line-height:43px;
+            margin: 0;
+            text-decoration: none;
+        }
+    }
+}
+
+.popular-authors {
+    border-top: 1px solid #14092C;
+    list-style: none;
+    text-align: center;
+    &-item {
+        padding: 3rem 0 0;
+    }
+    &-image {
+        border: 3px solid #BDA3D2;
+        border-radius: 100%;
+        object-fit: cover;
+        width: 60%;
+        max-width: 300px;
+    }
+    &-link {
+        color: #4F4572;
+        font-size: 1.2rem;
+        text-decoration: none;
+        &:hover, &:focus {
+            color: #14092C;
+        }
+    }
+}

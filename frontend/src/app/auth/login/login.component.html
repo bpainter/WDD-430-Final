@@ -1,0 +1,44 @@
+<main class="main-content login">
+    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading" class="form">
+        <header class="form-header">
+            <h1 class="form-title">Login or Create an Account</h1>
+            <p>Be boring with Bermon and share your thoughts with the world by joining us on our boring journey.</p>
+            <p>Need to {{ isLoginMode ? 'Create an Account' : 'Login' }}? If not, 
+                <button class="form-toggle" (click)="onSwitchMode()" type="button">
+                Go to {{ isLoginMode ? 'Sign Up' : 'Login' }}</button>
+            </p>
+        </header>
+
+        <section class="form-body">
+            <h2 class="form-body-title">{{ isLoginMode ? 'Login' : 'Sign Up' }}</h2>
+
+            <div class="form-alert" *ngIf="error">
+                <p>{{ error.status }} - {{error.message}}</p>
+            </div>
+
+            <div *ngIf="isLoading" class="loading-notification">
+                <app-loading></app-loading>
+            </div>
+
+            <ul class="form-group">
+                <li class="form-group-item">
+                    <label for="email">E-Mail</label>
+                    <input type="email" id="email" class="form-control" ngModel name="email" required email />
+                </li>
+                <li class="form-group-item">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" ngModel name="password" required minlength="6" />
+                </li>
+            </ul>
+
+        </section>
+
+        <footer class="form-footer">
+            <button class="form-action form-action-primary" type="submit" [disabled]="!authForm.valid">
+                {{ isLoginMode ? 'Login' : 'Sign Up' }}
+            </button>
+            
+            <a [routerLink]="['/reset-password']" class="form-footer-link forgot-password">Forget Password</a>
+        </footer>
+    </form>
+</main>

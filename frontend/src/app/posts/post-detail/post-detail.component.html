@@ -1,0 +1,37 @@
+<main class="main-content post-details">
+  <article class="post" *ngIf="post">
+    <div class="form-alert" *ngIf="error">
+      <p>{{ error.status }} - {{error.message}}</p>
+    </div>
+
+    <div *ngIf="isloading" class="loading-notification">
+      <app-loading></app-loading>
+    </div>
+
+    <header class="post-header">
+      <h1 class="post-title">
+        {{post.title}}
+      </h1>
+      <p class="post-date">Posted on {{post.postDate | date:'short'}}</p>
+
+      <div class="post-author"  *ngIf="profile">
+        <img src={{profile.imagePath}} alt="" class="post-author-image">
+        <a [routerLink]="['../public', profile.username]" class="post-author-name">{{profile.username}}</a>
+      </div>
+    </header>
+
+    <section class="post-body">
+      <img src={{post.imagePath}} alt="" class="post-body-image">
+      <div class="post-body-content">
+        {{post.content}}
+      </div>
+    </section>
+
+    <footer class="post-footer" *ngIf="isAuth && url =='myposts' ">
+      <a [routerLink]="['../edit',postId]" class="action-primary">
+        Edit Post
+      </a>
+      <button type="button" class="action-destructive" (click)="OnDelete(postId)">Delete</button>
+    </footer>
+  </article>
+</main>
